@@ -2,13 +2,29 @@ import Head from 'next/head'
 import Header from '@components/Header'
 import Footer from '@components/Footer'
 
+function reqListener () {
+  console.log(this.responseText);
+}
+
+// fetch('http://128.2.205.119:8082/recommend/231204', {
+//   mode: 'cors',
+//   //credentials: 'true'
+//   credentials: 'same-origin'
+// }).then(response => response)
+// .then(data => console.log(data));
+
+
+var XMLHttpRequest = require('xhr2');
+
+var oReq = new XMLHttpRequest();
+oReq.addEventListener("load", reqListener);
+oReq.open("GET", "http://128.2.205.119:8082/recommend/231204");
+oReq.send();
+
 export default function Home() {
 
-  fetch('http://128.2.205.103:8082/recommend/231204/')
-  .then(response => response.json())
-  .then(data => console.log(data));
-
   return (
+    
     <div className="container">
       <Head>
         <title>Next.js Starter!</title>
@@ -24,5 +40,6 @@ export default function Home() {
 
       <Footer />
     </div>
+    
   )
 }
